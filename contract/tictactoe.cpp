@@ -9,7 +9,7 @@ using namespace eosio;
        using contract::contract;
   
        [[eosio::action]] void welcome( name host, name challenger){
-         require_auth( get_self() ); 
+         require_auth(get_self()); 
          print("Welcome " host.name ", "  challenger.name);
   };
 };
