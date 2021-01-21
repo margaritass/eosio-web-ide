@@ -39,7 +39,7 @@ using namespace eosio;
        struct [[eosio::table]] game_record{    
        name host;
        name challenger;
-       uint64_t primary_key const {return ( host.value + challenger.value) ;};
+       uint64_t primary_key() const {return ( host.value + challenger.value) ;};
        EOSLIB_SERIALIZE(game_record, (host)(challenger))
        };
        typedef eosio::multi_index<
