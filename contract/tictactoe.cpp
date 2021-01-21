@@ -18,9 +18,9 @@ using namespace eosio;
          [[eosio::action]] void create( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value);
-         eosio::check(host != challenger, "Host And Challenger Should Be Different ");
+         check(host != challenger, "Host And Challenger Should Be Different ");
          auto itr = game.find(host.value + challenger.value);
-         eosio::check(itr == game.end(), "Game Between ", host, " and ", challenger, "Already In Progress");
+         check(itr == game.end(), "Game Between ", host, " and ", challenger, "Already In Progress");
          game.emplace(get_self(),[&](auto&  new_row){
            new_row.host = host;
            new_row.challenger = challenger;
@@ -29,7 +29,7 @@ using namespace eosio;
          [[eosio::action]] void close( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value); 
-         eosio::check(host != challenger, "Host And Challenger Should Be Different ");
+         check(host != challenger, "Host And Challenger Should Be Different ");
          auto itr = game.find(host.value + challenger.value);
          eosio::check(itr != game.end(), "Game Between ", host, " and ", challenger, "Not Found");
          itr = game.erase(itr);
