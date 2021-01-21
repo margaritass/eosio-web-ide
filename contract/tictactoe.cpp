@@ -19,7 +19,7 @@ using namespace eosio;
          require_auth(get_self());
          game_index game(get_self(), get_self().value);
          check(host != challenger, "Host And Challenger Should Be Different ");
-         auto itr = game.find(host.value + challenger.value);
+         auto itr = game.find((host.value + challenger.value));
          check(itr == game.end(), "Game Already In Progress");
          game.emplace(get_self(),[&](auto&  new_row){
            new_row.host = host;
@@ -30,7 +30,7 @@ using namespace eosio;
          require_auth(get_self());
          game_index game(get_self(), get_self().value); 
          check(host != challenger, "Host And Challenger Should Be Different ");
-         auto itr = game.find(host.value + challenger.value);
+         auto itr = game.find((host.value + challenger.value));
          eosio::check(itr != game.end(), "Game Not Found");
          itr = game.erase(itr);
           };  
@@ -39,7 +39,7 @@ using namespace eosio;
        struct [[eosio::table]] game_record{    
        name host;
        name challenger;
-       uint64_t primary_key const {return host.value + challenger.value ;};
+       uint64_t primary_key const {return ( host.value + challenger.value) ;};
        EOSLIB_SERIALIZE(game_record, (host)(challenger))
        };
        typedef eosio::multi_index<
