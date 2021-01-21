@@ -19,17 +19,17 @@ using namespace eosio;
          require_auth(get_self());
          game_index game(get_self(), get_self().value);
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
-         auto itr = game.find(host.value + challenger.value)
+         auto itr = game.find(host.value + challenger.value);
          eosio::check(itr == game.end(), "Game Between ", host, " and ", challenger "Already In Progress");
-         game.emplace(get_self(),[&](auto& game_record new_row));
+         game.emplace(get_self(),[&](auto&  new_row){
            new_row.host = host;
            new_row.challenger = challenger;
-          }; 
+          }); 
          [[eosio::action]] void close( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value); 
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
-         auto itr = game.find(host.value + challenger.value)
+         auto itr = game.find(host.value + challenger.value);
          eosio::check(itr != game.end(), "Game Between ", host, " and ", challenger "Not Found");
          itr = game.erase(itr);
           };  
