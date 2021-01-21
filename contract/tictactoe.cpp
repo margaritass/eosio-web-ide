@@ -15,7 +15,7 @@ using namespace eosio;
          require_auth(get_self()); 
          print( "Welcome ",  host , ", ", challenger ); };
 
-         [[eosio::action]] const create( name host, name challenger){
+         [[eosio::action]] void create( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value);
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
@@ -25,7 +25,7 @@ using namespace eosio;
            new_row.host = host;
            new_row.challenger = challenger;
           }; 
-         [[eosio::action]] const close( name host, name challenger){
+         [[eosio::action]] void close( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value); 
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
