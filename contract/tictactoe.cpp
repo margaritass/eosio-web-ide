@@ -5,8 +5,7 @@ using namespace eosio;
   class [[eosio::contract("tictactoe")]] tictactoe : public eosio::contract {
  
     public:
-    // Use contract's constructor
-       using contract::contract;
+    
         tictactoe( name self, name first_receiver,datastream<const char>*ds): 
          contract( self, first_receiver,ds){}
        
@@ -32,7 +31,7 @@ using namespace eosio;
          check(host != challenger, "Host And Challenger Should Be Different ");
          auto itr = game.find((host.value + challenger.value));
          eosio::check(itr != game.end(), "Game Not Found");
-         itr = game.erase(itr);
+         game.erase(itr);
           };  
 
     private:
