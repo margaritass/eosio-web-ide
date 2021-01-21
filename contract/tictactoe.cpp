@@ -25,6 +25,7 @@ using namespace eosio;
            new_row.host = host;
            new_row.challenger = challenger;
           }); 
+         };
          [[eosio::action]] void close( name host, name challenger){
          require_auth(get_self());
          game_index game(get_self(), get_self().value); 
@@ -48,4 +49,4 @@ using namespace eosio;
   
       
  
-};
+  }};
