@@ -6,8 +6,8 @@ using namespace eosio;
  
     public:
     
-        tictactoe( name self, name first_receiver,datastream<const char>*ds): 
-         contract( self, first_receiver,ds){}
+        tictactoe( name receiver, name code,  datastream<const char*> ds): 
+         contract( receiver, code, ds){}
        
 
         [[eosio::action]] void welcome( name host, name challenger){
