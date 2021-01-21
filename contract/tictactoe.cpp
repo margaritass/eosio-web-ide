@@ -2,8 +2,8 @@
 
 using namespace eosio;
 
-
-  class tictactoe : eosio::contract {
+  class [[eosio::contract("tictactoe")]] tictactoe : public eosio::contract {
+ 
     public:
     // Use contract's constructor
        using contract::contract;
