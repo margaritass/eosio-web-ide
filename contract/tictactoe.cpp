@@ -8,7 +8,7 @@ using namespace eosio;
     // Use contract's constructor
        using contract::contract;
         tictactoe( name self, name first_receiver,datastream<const char>*ds): 
-         contract( self, first_receiver,ds)
+         contract( self, first_receiver,ds){}
         game_index game(get_self(), get_self().value);
 
         [[eosio::action]] void welcome( name host, name challenger){
