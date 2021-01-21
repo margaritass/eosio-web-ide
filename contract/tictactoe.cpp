@@ -9,7 +9,7 @@ using namespace eosio;
        using contract::contract;
         tictactoe( name self, name first_receiver,datastream<const char>*ds): 
          contract( self, first_receiver,ds){}
-        game_index game(get_self(), get_self().value);
+       
 
         [[eosio::action]] void welcome( name host, name challenger){
          require_auth(get_self()); 
@@ -17,6 +17,7 @@ using namespace eosio;
 
          [[eosio::action]] const create( name host, name challenger){
          require_auth(get_self());
+         game_index game(get_self(), get_self().value);
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
          auto itr = game.find(host.value + challenger.value)
          eosio::check(itr == game.end(), "Game Between ", host, " and ", challenger "Already In Progress");
@@ -25,7 +26,8 @@ using namespace eosio;
            new_row.challenger = challenger;
           }; 
          [[eosio::action]] const close( name host, name challenger){
-         require_auth(get_self()); 
+         require_auth(get_self());
+         game_index game(get_self(), get_self().value); 
          eosio::check(host != challenger, "Host And Challenger Should Be Different ");
          auto itr = game.find(host.value + challenger.value)
          eosio::check(itr != game.end(), "Game Between ", host, " and ", challenger "Not Found");
