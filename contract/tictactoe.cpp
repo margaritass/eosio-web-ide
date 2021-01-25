@@ -39,13 +39,18 @@ using namespace eosio;
        name host;
        name challenger;
        uint64_t primary_key() const {return ( host.value + challenger.value) ;};
+       uint64_t by_challenger() const {return (challenger.value) ;};
        EOSLIB_SERIALIZE(game_record, (host)(challenger))
        };
        typedef eosio::multi_index<
-         name("game"), //- Table Name
-         game_record  //- Table Structure
-         >game_index ;   //- Type Name
+         name("game"),                                  //- Table Name
+         game_record,                                  //- Table Structure
+         eosio::indexed_by<
+          name("challenger"),
+          eosio::const_mem_fun<
+            game_record,
+            uint64_t,       
+            &surveillance_record::by_secondary>>                             
+         >game_index ;                                  //- Type Name
   
-      
- 
-  };
+ };
