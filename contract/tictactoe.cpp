@@ -50,7 +50,7 @@ using namespace eosio;
           eosio::const_mem_fun<
             game_record,
             uint64_t,       
-            &surveillance_record::by_secondary>>                             
+            &game_record::by_secondary>>                             
          >game_index ;                                  //- Type Name
   
  };
